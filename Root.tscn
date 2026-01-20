@@ -1,0 +1,185 @@
+[gd_scene load_steps=17 format=3 uid="uid://bnfhwocvxdrit"]
+
+[ext_resource type="Script" uid="uid://dobf6spmtxpho" path="res://root.gd" id="1_gxo8o"]
+[ext_resource type="Theme" uid="uid://bh5c3ed7uaac6" path="res://basic.tres" id="2_24d08"]
+[ext_resource type="PackedScene" uid="uid://c4si6ram0sudp" path="res://Tracker.tscn" id="3_170dk"]
+[ext_resource type="PackedScene" uid="uid://b5e0gi7ihhjek" path="res://MoneyTracker.tscn" id="4_2qvp8"]
+[ext_resource type="PackedScene" uid="uid://c7e6sfp70xy6i" path="res://FighterChoice.tscn" id="4_cwqeq"]
+[ext_resource type="Texture2D" uid="uid://hhnm8231lxvc" path="res://assets/flash.png" id="4_cxe32"]
+[ext_resource type="Texture2D" uid="uid://csapupqyn2qvk" path="res://assets/theironclad.png" id="5_3ipfy"]
+[ext_resource type="Texture2D" uid="uid://buvc54sknwvx1" path="res://assets/strength.png" id="5_8hd61"]
+[ext_resource type="Texture2D" uid="uid://cbi0qiuxa8xse" path="res://assets/thesilent.png" id="6_g0d6c"]
+[ext_resource type="Texture2D" uid="uid://dqw2hf23ukhc8" path="res://assets/weakened.png" id="6_g1ltr"]
+[ext_resource type="PackedScene" uid="uid://del5fn5ogkbjg" path="res://CharacterSpecific/TheSilent.tscn" id="6_hbe7s"]
+[ext_resource type="Texture2D" uid="uid://bamvabbjcv6mr" path="res://assets/heart.png" id="6_vf7dw"]
+[ext_resource type="Texture2D" uid="uid://bv188n1e0mblr" path="res://assets/vulnerable.png" id="7_ebfx1"]
+[ext_resource type="Texture2D" uid="uid://d2x5i8idwuryy" path="res://assets/thedefect.png" id="7_f5i44"]
+[ext_resource type="Texture2D" uid="uid://ddx6siccsacr" path="res://assets/thewatcher.png" id="8_n0g3p"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cxe32"]
+load_path = "res://.godot/imported/shield.png-46d74908b0ac118b50397d7021ae31f8.ctex"
+
+[node name="Root" type="CanvasLayer"]
+script = ExtResource("1_gxo8o")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_24d08")
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(1, 0.4862745, 0.41960785, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Energy" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
+unique_name_in_owner = true
+layout_mode = 2
+image = ExtResource("4_cxe32")
+reset_value = 3
+max_value = 6
+
+[node name="Block" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
+unique_name_in_owner = true
+layout_mode = 2
+image = SubResource("CompressedTexture2D_cxe32")
+max_value = 20
+
+[node name="Health" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
+unique_name_in_owner = true
+layout_mode = 2
+image = ExtResource("6_vf7dw")
+reset_value = 10
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Money" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_2qvp8")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Strength" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_170dk")]
+unique_name_in_owner = true
+layout_mode = 2
+image = ExtResource("5_8hd61")
+temp_button_enabled = true
+max_value = 8
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Weakened" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("3_170dk")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+image = ExtResource("6_g1ltr")
+max_value = 3
+
+[node name="Separator" type="VSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="Vulnerable" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("3_170dk")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+image = ExtResource("7_ebfx1")
+max_value = 3
+
+[node name="CharacterSpecific" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TheSilent" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/CharacterSpecific" instance=ExtResource("6_hbe7s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="EndTurnButton" type="Button" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "End turn"
+
+[node name="EndTurnKeepBlockButton" type="Button" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "End turn, keep block"
+
+[node name="EndCombatButton" type="Button" parent="MarginContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "End combat"
+
+[node name="VBoxContainer" type="GridContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="TheIronclad" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Ironclad"
+image = ExtResource("5_3ipfy")
+
+[node name="TheSilent" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Silent"
+image = ExtResource("6_g0d6c")
+
+[node name="TheDefect" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Defect"
+image = ExtResource("7_f5i44")
+
+[node name="TheWatcher" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Watcher"
+image = ExtResource("8_n0g3p")
+
+[connection signal="pressed" from="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2/EndTurnKeepBlockButton" to="." method="_on_end_turn_keep_block_button_pressed"]
+[connection signal="pressed" from="MarginContainer/TextureRect/VBoxContainer/EndCombatButton" to="." method="_on_end_combat_button_pressed"]

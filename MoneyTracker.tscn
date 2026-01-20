@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5e0gi7ihhjek"]
+
+[ext_resource type="Script" uid="uid://cildfsfson6h" path="res://money_tracker.gd" id="1_at3uv"]
+[ext_resource type="Texture2D" uid="uid://djq6yokvgrvs8" path="res://assets/coin.png" id="2_at3uv"]
+
+[node name="MoneyTracker" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_at3uv")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_at3uv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Display" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "5"
+
+[node name="Sub5Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-5"
+
+[node name="Sub1Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-1"
+
+[node name="Add1Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+1"
+
+[node name="Add5Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+5"
+
+[connection signal="pressed" from="Sub5Button" to="." method="_on_sub_5_button_pressed"]
+[connection signal="pressed" from="Sub1Button" to="." method="_on_sub_1_button_pressed"]
+[connection signal="pressed" from="Add1Button" to="." method="_on_add_1_button_pressed"]
+[connection signal="pressed" from="Add5Button" to="." method="_on_add_5_button_pressed"]

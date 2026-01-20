@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://del5fn5ogkbjg"]
+
+[ext_resource type="PackedScene" uid="uid://c4si6ram0sudp" path="res://Tracker.tscn" id="1_suntw"]
+[ext_resource type="Script" uid="uid://bhlt50g7etv3n" path="res://CharacterSpecific/the_silent.gd" id="1_un12u"]
+[ext_resource type="Texture2D" uid="uid://tfbc6mc04jec" path="res://assets/shiv.png" id="2_nd7ml"]
+
+[node name="TheSilent" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_un12u")
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Shivs" parent="CenterContainer" instance=ExtResource("1_suntw")]
+unique_name_in_owner = true
+layout_mode = 2
+image = ExtResource("2_nd7ml")
