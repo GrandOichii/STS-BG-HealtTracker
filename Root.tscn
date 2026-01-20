@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnfhwocvxdrit"]
+[gd_scene load_steps=19 format=3 uid="uid://bnfhwocvxdrit"]
 
 [ext_resource type="Script" uid="uid://dobf6spmtxpho" path="res://root.gd" id="1_gxo8o"]
 [ext_resource type="Theme" uid="uid://bh5c3ed7uaac6" path="res://basic.tres" id="2_24d08"]
@@ -15,14 +15,20 @@
 [ext_resource type="Texture2D" uid="uid://bv188n1e0mblr" path="res://assets/vulnerable.png" id="7_ebfx1"]
 [ext_resource type="Texture2D" uid="uid://d2x5i8idwuryy" path="res://assets/thedefect.png" id="7_f5i44"]
 [ext_resource type="Texture2D" uid="uid://ddx6siccsacr" path="res://assets/thewatcher.png" id="8_n0g3p"]
+[ext_resource type="PackedScene" uid="uid://cbql6t20yp8b3" path="res://CharacterSpecific/TheDefect.tscn" id="16_4qeq3"]
+[ext_resource type="PackedScene" uid="uid://b27ad2b7mub4s" path="res://CharacterSpecific/TheWatcher.tscn" id="17_wsrtb"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cxe32"]
 load_path = "res://.godot/imported/shield.png-46d74908b0ac118b50397d7021ae31f8.ctex"
 
 [node name="Root" type="CanvasLayer"]
 script = ExtResource("1_gxo8o")
+TheIroncladColor = Color(0.27058825, 0, 0, 1)
+TheSilentColor = Color(0, 0.20392157, 0, 1)
+TheDefectColor = Color(0, 0.034869142, 0.31949994, 1)
+TheWatcherColor = Color(0.23777941, 0.011103933, 0.37794206, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -34,11 +40,46 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="TextureRect" type="ColorRect" parent="MarginContainer"]
+[node name="CharacterChoice" type="GridContainer" parent="Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="TheIronclad" parent="Margin/CharacterChoice" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Ironclad"
+image = ExtResource("5_3ipfy")
+
+[node name="TheSilent" parent="Margin/CharacterChoice" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Silent"
+image = ExtResource("6_g0d6c")
+
+[node name="TheDefect" parent="Margin/CharacterChoice" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Defect"
+image = ExtResource("7_f5i44")
+
+[node name="TheWatcher" parent="Margin/CharacterChoice" instance=ExtResource("4_cwqeq")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+character = "The Watcher"
+image = ExtResource("8_n0g3p")
+
+[node name="Trackers" type="ColorRect" parent="Margin"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 color = Color(1, 0.4862745, 0.41960785, 0)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TextureRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Trackers"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,140 +87,122 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Trackers/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Trackers/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Energy" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
+[node name="Energy" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
 unique_name_in_owner = true
 layout_mode = 2
 image = ExtResource("4_cxe32")
 reset_value = 3
 max_value = 6
 
-[node name="Block" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
+[node name="Block" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
 unique_name_in_owner = true
 layout_mode = 2
 image = SubResource("CompressedTexture2D_cxe32")
 max_value = 20
 
-[node name="Health" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
+[node name="Health" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_170dk")]
 unique_name_in_owner = true
 layout_mode = 2
 image = ExtResource("6_vf7dw")
 reset_value = 10
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Margin/Trackers/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Margin/Trackers/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Money" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_2qvp8")]
+[node name="Money" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_2qvp8")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Strength" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_170dk")]
+[node name="Strength" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("3_170dk")]
 unique_name_in_owner = true
 layout_mode = 2
 image = ExtResource("5_8hd61")
 temp_button_enabled = true
 max_value = 8
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HSeparator2" type="HSeparator" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Weakened" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("3_170dk")]
+[node name="Weakened" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("3_170dk")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 image = ExtResource("6_g1ltr")
 max_value = 3
 
-[node name="Separator" type="VSeparator" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Separator" type="VSeparator" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="Vulnerable" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("3_170dk")]
+[node name="Vulnerable" parent="Margin/Trackers/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("3_170dk")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 image = ExtResource("7_ebfx1")
 max_value = 3
 
-[node name="CharacterSpecific" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer"]
+[node name="CharacterSpecific" type="HBoxContainer" parent="Margin/Trackers/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TheSilent" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer/CharacterSpecific" instance=ExtResource("6_hbe7s")]
+[node name="TheSilent" parent="Margin/Trackers/VBoxContainer/HBoxContainer/CharacterSpecific" instance=ExtResource("6_hbe7s")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/TextureRect/VBoxContainer"]
+[node name="TheDefect" parent="Margin/Trackers/VBoxContainer/HBoxContainer/CharacterSpecific" instance=ExtResource("16_4qeq3")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/TextureRect/VBoxContainer"]
+[node name="TheWatcher" parent="Margin/Trackers/VBoxContainer/HBoxContainer/CharacterSpecific" instance=ExtResource("17_wsrtb")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
-[node name="EndTurnButton" type="Button" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="Margin/Trackers/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Margin/Trackers/VBoxContainer"]
+layout_mode = 2
+
+[node name="EndTurnButton" type="Button" parent="Margin/Trackers/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "End turn"
 
-[node name="EndTurnKeepBlockButton" type="Button" parent="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2"]
+[node name="EndTurnKeepBlockButton" type="Button" parent="Margin/Trackers/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "End turn, keep block"
 
-[node name="EndCombatButton" type="Button" parent="MarginContainer/TextureRect/VBoxContainer"]
+[node name="EndCombatButton" type="Button" parent="Margin/Trackers/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "End combat"
 
-[node name="VBoxContainer" type="GridContainer" parent="MarginContainer"]
-visible = false
-layout_mode = 2
-columns = 2
-
-[node name="TheIronclad" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-character = "The Ironclad"
-image = ExtResource("5_3ipfy")
-
-[node name="TheSilent" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-character = "The Silent"
-image = ExtResource("6_g0d6c")
-
-[node name="TheDefect" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-character = "The Defect"
-image = ExtResource("7_f5i44")
-
-[node name="TheWatcher" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_cwqeq")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-character = "The Watcher"
-image = ExtResource("8_n0g3p")
-
-[connection signal="pressed" from="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TextureRect/VBoxContainer/HBoxContainer2/EndTurnKeepBlockButton" to="." method="_on_end_turn_keep_block_button_pressed"]
-[connection signal="pressed" from="MarginContainer/TextureRect/VBoxContainer/EndCombatButton" to="." method="_on_end_combat_button_pressed"]
+[connection signal="open_request" from="Margin/CharacterChoice/TheIronclad" to="." method="_on_the_ironclad_open_request"]
+[connection signal="open_request" from="Margin/CharacterChoice/TheSilent" to="." method="_on_the_silent_open_request"]
+[connection signal="open_request" from="Margin/CharacterChoice/TheDefect" to="." method="_on_the_defect_open_request"]
+[connection signal="open_request" from="Margin/CharacterChoice/TheWatcher" to="." method="_on_the_watcher_open_request"]
+[connection signal="pressed" from="Margin/Trackers/VBoxContainer/HBoxContainer2/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="Margin/Trackers/VBoxContainer/HBoxContainer2/EndTurnKeepBlockButton" to="." method="_on_end_turn_keep_block_button_pressed"]
+[connection signal="pressed" from="Margin/Trackers/VBoxContainer/EndCombatButton" to="." method="_on_end_combat_button_pressed"]

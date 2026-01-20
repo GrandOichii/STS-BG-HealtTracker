@@ -28,22 +28,22 @@ text = "5"
 [node name="Sub5Button" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "-5"
+text = " -5 "
 
 [node name="Sub1Button" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "-1"
+text = " -1 "
 
 [node name="Add1Button" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "+1"
+text = " +1 "
 
 [node name="Add5Button" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "+5"
+text = " +5 "
 
 [connection signal="pressed" from="Sub5Button" to="." method="_on_sub_5_button_pressed"]
 [connection signal="pressed" from="Sub1Button" to="." method="_on_sub_1_button_pressed"]

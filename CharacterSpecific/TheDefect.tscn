@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbql6t20yp8b3"]
+
+[ext_resource type="PackedScene" uid="uid://ctwfi0lwjr6rr" path="res://CharacterSpecific/Orb.tscn" id="1_gcdd0"]
+[ext_resource type="Script" uid="uid://15c2m0f6kxqs" path="res://CharacterSpecific/the_defect.gd" id="1_qy6jw"]
+
+[node name="TheDefect" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_qy6jw")
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Orbs" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Orb1" parent="VBoxContainer/ScrollContainer/Orbs" instance=ExtResource("1_gcdd0")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Orb2" parent="VBoxContainer/ScrollContainer/Orbs" instance=ExtResource("1_gcdd0")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Orb3" parent="VBoxContainer/ScrollContainer/Orbs" instance=ExtResource("1_gcdd0")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Add orb"

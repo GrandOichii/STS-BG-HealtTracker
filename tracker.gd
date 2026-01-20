@@ -20,13 +20,18 @@ func _ready() -> void:
 func update_display():
 	%Display.text = str(_value)
 	
-func reset():
+func soft_reset():
 	if temp_button_enabled:
 		reset_temp()
 		return
 	_value = reset_value
 	update_display()
-	
+
+func reset():
+	reset_temp()
+	_value = reset_value
+	update_display()
+
 func reset_temp():
 	_value -= _temp_mod
 	_temp_mod = 0
